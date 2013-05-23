@@ -25,7 +25,8 @@
 #import <UIKit/UIKit.h>
 
 typedef enum {
-	GroupedTableViewCellPositionFull,
+	GroupedTableViewCellPositionUnknown = 0,
+    GroupedTableViewCellPositionFull,
 	GroupedTableViewCellPositionTop,	
 	GroupedTableViewCellPositionMiddle,
 	GroupedTableViewCellPositionBottom
@@ -34,6 +35,7 @@ typedef enum {
 @interface GroupedTableViewCell : UITableViewCell {
 }
 
-@property (nonatomic, assign) GroupedTableViewCellPosition position;
+@property (nonatomic) UIEdgeInsets backgroundImageEdgeInsets;
+@property (nonatomic) GroupedTableViewCellPosition position;
 
 @end

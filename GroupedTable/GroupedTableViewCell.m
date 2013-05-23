@@ -30,7 +30,8 @@
     // Initialization code
     self.backgroundView = [[UIImageView alloc] initWithImage:nil highlightedImage:nil];
     self.backgroundView.contentMode = UIViewContentModeScaleToFill;
-    
+
+    self.backgroundImageEdgeInsets = UIEdgeInsetsMake(4.0, 4.0, 4.0, 4.0);    
     self.position = GroupedTableViewCellPositionTop;
     
     self.textLabel.font = [UIFont boldSystemFontOfSize:14.0];		
@@ -65,14 +66,23 @@
     self.textLabel.shadowColor = (selected) ? [UIColor colorWithWhite:0.098 alpha:1.000] : [UIColor colorWithWhite:0.702 alpha:1.000];
 }
 
-- (void)setPosition:(GroupedTableViewCellPosition)value {
-	
-	UIImage *backgroundImage = nil;	
-	UIImage *highlightedBackgroundImage = nil;
-	
-    UIEdgeInsets insets = UIEdgeInsetsMake(4.0, 4.0, 4.0, 4.0);
+- (void)setBackgroundImageEdgeInsets:(UIEdgeInsets)backgroundImageEdgeInsets {
+    if (UIEdgeInsetsEqualToEdgeInsets(backgroundImageEdgeInsets, _backgroundImageEdgeInsets)) return;
     
+    _backgroundImageEdgeInsets = backgroundImageEdgeInsets;
+    
+    GroupedTableViewCellPosition position = self.position;
+    self.position = GroupedTableViewCellPositionUnknown;
+    self.position = position;
+}
+
+- (void)setPosition:(GroupedTableViewCellPosition)value {	
     if (_position != value) {
+        
+        UIImage *backgroundImage = nil;
+        UIImage *highlightedBackgroundImage = nil;
+        UIEdgeInsets insets = self.backgroundImageEdgeInsets;
+
 		switch (value) {
 			case GroupedTableViewCellPositionTop:
 				backgroundImage = [[UIImage imageNamed:@"GroupedTableTopCellBackground.png"] resizableImageWithCapInsets:insets];
@@ -89,9 +99,11 @@
 				highlightedBackgroundImage = [[UIImage imageNamed:@"GroupedTableBottomCellBackgroundHighlighted.png"] resizableImageWithCapInsets:insets];											  
 				
 				break;
+			case GroupedTableViewCellPositionFull:
+				backgroundImage = [[UIImage imageNamed:@"GroupedTableFullCellBackground.png"] resizableImageWithCapInsets:insets];
+				highlightedBackgroundImage = [[UIImage imageNamed:@"GroupedTableFullCellBackgroundHighlighted.png"] resizableImageWithCapInsets:insets];
+				break;
 			default:
-				backgroundImage = [[UIImage imageNamed:@"GroupedTableFullCellBackground.png"] resizableImageWithCapInsets:insets];								   
-				highlightedBackgroundImage = [[UIImage imageNamed:@"GroupedTableFullCellBackgroundHighlighted.png"] resizableImageWithCapInsets:insets];											  
 				break;
 		}
 		
