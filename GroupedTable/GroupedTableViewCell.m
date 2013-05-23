@@ -28,22 +28,34 @@
 
 @synthesize position;
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
-        // Initialization code
-		self.backgroundView = [[UIImageView alloc] initWithImage:nil highlightedImage:nil];
-		self.backgroundView.contentMode = UIViewContentModeScaleToFill;
-        
-		self.position = GroupedTableViewCellPositionTop;
-		
-		self.textLabel.font = [UIFont boldSystemFontOfSize:14.0];		
-		self.textLabel.backgroundColor = [UIColor clearColor];
-				
-		self.selectionStyle = UITableViewCellSelectionStyleNone;
-		[self setSelected:NO];
+- (void)commonInit {
+    // Initialization code
+    self.backgroundView = [[UIImageView alloc] initWithImage:nil highlightedImage:nil];
+    self.backgroundView.contentMode = UIViewContentModeScaleToFill;
+    
+    self.position = GroupedTableViewCellPositionTop;
+    
+    self.textLabel.font = [UIFont boldSystemFontOfSize:14.0];		
+    self.textLabel.backgroundColor = [UIColor clearColor];
+            
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    [self setSelected:NO];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    if ((self = [super initWithCoder:aDecoder])) {
+        [self commonInit];
     }
     return self;
 }
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
+        [self commonInit];
+    }
+    return self;
+}
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {	
     [super setSelected:selected animated:animated];
