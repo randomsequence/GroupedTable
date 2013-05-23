@@ -36,6 +36,7 @@
     
     self.textLabel.font = [UIFont boldSystemFontOfSize:14.0];		
     self.textLabel.backgroundColor = [UIColor clearColor];
+    self.detailTextLabel.backgroundColor = [UIColor clearColor];
             
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     [self setSelected:NO];
