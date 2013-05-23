@@ -26,8 +26,6 @@
 
 @implementation GroupedTableViewCell
 
-@synthesize position;
-
 - (void)commonInit {
     // Initialization code
     self.backgroundView = [[UIImageView alloc] initWithImage:nil highlightedImage:nil];
@@ -74,7 +72,7 @@
 	
     UIEdgeInsets insets = UIEdgeInsetsMake(4.0, 4.0, 4.0, 4.0);
     
-    if (position != value) {
+    if (_position != value) {
 		switch (value) {
 			case GroupedTableViewCellPositionTop:
 				backgroundImage = [[UIImage imageNamed:@"GroupedTableTopCellBackground.png"] resizableImageWithCapInsets:insets];
@@ -100,7 +98,7 @@
 		[(UIImageView *)[self backgroundView] setImage:backgroundImage];
 		[(UIImageView *)[self backgroundView] setHighlightedImage:highlightedBackgroundImage];		
 		
-		position = value;
+		_position = value;
 		
 		[self setNeedsDisplay];
     }

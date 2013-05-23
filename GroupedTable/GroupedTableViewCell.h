@@ -32,7 +32,6 @@ typedef enum {
 } GroupedTableViewCellPosition;
 
 @interface GroupedTableViewCell : UITableViewCell {
-	GroupedTableViewCellPosition position;
 }
 
 @property (nonatomic, assign) GroupedTableViewCellPosition position;
